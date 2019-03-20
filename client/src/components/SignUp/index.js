@@ -84,7 +84,7 @@ class SignUp extends Component {
         </div>
         <div className="form-group">
           <label for="inputPassword">Password</label>
-          <input type="text" 
+          <input type="password" 
                  className="form-control" 
                  id="inputPassword" 
                  aria-describedby="passwordHelp"
@@ -96,7 +96,7 @@ class SignUp extends Component {
         </div>
         <div className="form-group">
           <label for="confirmPassword">Confirm Password</label>
-          <input type="text" 
+          <input type="password" 
                  className="form-control" 
                  id="confirmPassword"
                  name="confirmPassword"

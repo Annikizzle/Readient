@@ -43,9 +43,9 @@ class Nav extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/saved">Saved</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/saved">Saved</Link>
-            </li>
+            </li> */}
             {/* {loggedIn ? (
               <section className="navbar-section">
                 <Link className="btn btn-danger" to="/user/logout">Logout</Link>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import { Input, FormBtn } from "../Form";
+import { Input, FormBtn } from "../components/Form";
 
 class Login extends Component {
   constructor() {
@@ -38,7 +38,7 @@ class Login extends Component {
           username: res.data.username
         })
         this.setState({
-          redirectTo: "/saved"
+          redirectTo: "/"
         });
       }
     }).catch((err) => {
@@ -49,28 +49,30 @@ class Login extends Component {
 
   render() {
     return (
-      <form>
-        <div className="form-group">
-        <label htmlFor="loginUsername">Username</label>
-        <Input type="text" 
-               id="loginUsername" 
-               placeholder="Enter username"
-               name="username"
-               value={this.state.username}
-               onChange={this.handleChange}
-        />
-        </div>
-        <div className="form-group">
-          <label htmlFor="loginPassword">Password</label>
-          <Input type="password" 
-                 id="loginPassword" 
-                 name="password"
-                 value={this.state.password}
-                 onChange={this.handleChange}
+      <div className="col-md-4 mx-auto my-5">
+        <form>
+          <div className="form-group">
+          <label htmlFor="loginUsername">Username</label>
+          <Input type="text" 
+                id="loginUsername" 
+                placeholder="Enter username"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
           />
-        </div>
-        <FormBtn className="btn btn-primary" onClick={this.handleSubmit}>Submit</FormBtn>
-      </form>
+          </div>
+          <div className="form-group">
+            <label htmlFor="loginPassword">Password</label>
+            <Input type="password" 
+                  id="loginPassword" 
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+            />
+          </div>
+          <FormBtn className="btn btn-primary" onClick={this.handleSubmit}>Submit</FormBtn>
+        </form>
+      </div>
     )
   }
 }

@@ -6,8 +6,8 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <SignUp />
-        <Login />
+        {/* <SignUp />
+        <Login /> */}
       </div>
     )
   }

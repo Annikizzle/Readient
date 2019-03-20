@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import { Input, FormBtn } from "../Form";
 
 class SignUp extends Component {
   constructor(props) {
@@ -59,9 +60,8 @@ class SignUp extends Component {
     return (
       <form>
         <div className="form-group">
-          <label for="inputEmail">Email Address</label>
-          <input type="email" 
-                 className="form-control" 
+          <label htmlFor="inputEmail">Email Address</label>
+          <Input type="email" 
                  id="inputEmail" 
                  aria-describedby="emailHelp" 
                  placeholder="Enter email"
@@ -72,9 +72,8 @@ class SignUp extends Component {
           <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div className="form-group">
-          <label for="inputUsername">Username</label>
-          <input type="text" 
-                 className="form-control" 
+          <label htmlFor="inputUsername">Username</label>
+          <Input type="text" 
                  id="inputUsername" 
                  placeholder="Enter username"
                  name="username"
@@ -83,9 +82,8 @@ class SignUp extends Component {
           />
         </div>
         <div className="form-group">
-          <label for="inputPassword">Password</label>
-          <input type="password" 
-                 className="form-control" 
+          <label htmlFor="inputPassword">Password</label>
+          <Input type="password" 
                  id="inputPassword" 
                  aria-describedby="passwordHelp"
                  name="password"
@@ -95,16 +93,15 @@ class SignUp extends Component {
           <small id="passwordHelp" className="form-text text-muted">Password must be at least 8 chracters</small>
         </div>
         <div className="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" 
-                 className="form-control" 
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <Input type="password" 
                  id="confirmPassword"
                  name="confirmPassword"
                  value={this.confirmPassword}
                  onChange={this.handleChange}
           />
         </div>
-        <button className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+        <FormBtn className="btn btn-primary" onClick={this.handleSubmit}>Submit</FormBtn>
       </form>
     )
   }

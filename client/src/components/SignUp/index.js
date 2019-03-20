@@ -34,7 +34,7 @@ class SignUp extends Component {
     // else {
     //   alert("Bad job");
     // }
-    Axios.post("/users", {
+    Axios.post("/api/user", {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password

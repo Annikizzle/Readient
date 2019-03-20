@@ -44,13 +44,15 @@ class SignUp extends Component {
       password: this.state.password
     }).then((res) => {
       console.log(res);
-      if(res.data) {
+      console.log(res.data);
+      if(!res.data.error) {
         console.log("Successful Signup");
         this.setState({
           redirectTo: "/search"
         });
       }
       else {
+        // TODO DISPLAY SIGNUP ERROR AS MESSAGE ON PAGE 
         console.log("Sign-up error");
       }
     }).catch((err) => {
@@ -94,7 +96,7 @@ class SignUp extends Component {
                   value={this.state.password}
                   onChange={this.handleChange}
             />
-            <small id="passwordHelp" className="form-text text-muted">Password must be at least 8 chracters</small>
+            <small id="passwordHelp" className="form-text text-muted">Password must be at least 8 characters</small>
           </div>
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirm Password</label>

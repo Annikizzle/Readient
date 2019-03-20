@@ -4,7 +4,8 @@ const passport = require("../passport");
 module.exports = {
   createUser: (req, res) => {
     const { email, username, password } = req.body;
-    db.User.findOne({username: username, email: email}, (err, user) => {
+    db.User.findOne({username: username}, (err, user) => {
+      console.log(user);
       if (err) {
         console.log("User.js POST ERROR: ", err);
       }

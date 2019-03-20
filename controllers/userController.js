@@ -26,14 +26,36 @@ module.exports = {
       }
     });
   },
+
   attemptLogin: (req, res, next) => {
     console.log("Login user:");
     console.log(req.body);
     next();
   },
-  authLogin: () => passport.authenticate("local"),
+
   completeLogin: (req, res) => {
     console.log("Logged in", req.user);
     res.send(req.user.username);
+  },
+
+  getCurrentUser: (req, res, next) => {
+    console.log("USER: ");
+    console.log(req.user);
+    if (req.user) {
+      res.json({ user: req.user });
+    }
+    else {
+      res.json({ user: null });
+    }
+  },
+
+  logout: (req, res) => {
+    if (req.user) {
+      req.logout();
+      res.send({ msg: "Logging out" });
+    }
+    else {
+      res.send({ msg: "No user to log out" });
+    }
   }
 }

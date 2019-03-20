@@ -24,7 +24,9 @@ const UserSchema = new Schema({
 });
 
 UserSchema.methods = {
-  checkPassword: (inputPassword) => bcrypt.compareSync(inputPassword, this.password),
+  checkPassword: function(inputPassword) {
+    return bcrypt.compareSync(inputPassword, this.password);
+  },
   hashPassword: (plainTextPassword) => bcrypt.hashSync(plainTextPassword, 10)
 }
 

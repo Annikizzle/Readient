@@ -1,16 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
-import SignUp from "./components/SignUp";
+import Home from "./pages/Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-class App extends Component {
-  render() {
-    return (
-      <div class="container">
-        <h1>Just testing signup form, it won't stay here</h1>
-        <SignUp />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        {/* <Route exact path="/saved" component={Saved}></Route> */}
+        {/* <Route component={NoMatch}></Route> */}
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;

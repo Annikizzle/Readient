@@ -12,6 +12,7 @@ class SignUp extends Component {
     }
   }
 
+  // Validate confirm password every state change, if they match and pass length show green check
   validateForm = () => (
     this.state.email.length > 0 &&
     this.state.password.length > 7 &&

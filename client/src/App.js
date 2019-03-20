@@ -1,20 +1,65 @@
-import React from "react";
-import "./App.css";
-import Home from "./pages/Home";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Axios from "axios";
+import Home from "./pages/Home";
 import Nav from "./components/Nav";
+import "./App.css";
 
-function App() {
-  return (
-    <Router>
-      <Nav />
-      <Switch>
-        <Route exact path="/" component={Home}></Route>
-        {/* <Route exact path="/saved" component={Saved}></Route> */}
-        {/* <Route component={NoMatch}></Route> */}
-      </Switch>
-    </Router>
-  )
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
+      username: null
+    }
+
+    this.getUser = this.getUser.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+  }
+
+  componentDidMount() {
+    this.getUser();
+  }
+
+  updateUser(userObject) {
+    this.setState(userObject);
+  }
+
+  getUser() {
+    Axios.get("/user").then((res) => {
+      console.log("Get user response: ");
+      console.log(res.data);
+      if (res.data.user) {
+        console.log("Get user: There is a user saved in the server session");
+        this.setState({
+          loggedIn: true,
+          username: res.data.user.username
+        });
+      }
+      else {
+        console.log("Get user: No user saved in the server session");
+        this.setState({
+          loggedIn: false,
+          username: null
+        });
+      }
+    })
+  }
+
+
+  render() {
+    return (
+      <Router>
+        <Nav />
+        <Switch>
+          <Route exact path="/" component={Home}></Route>
+          {/* <Route exact path="/saved" component={Saved}></Route> */}
+          {/* <Route component={NoMatch}></Route> */}
+        </Switch>
+      </Router>
+    )
+  }
 }
 
 export default App;

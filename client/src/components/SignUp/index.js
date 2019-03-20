@@ -12,6 +12,9 @@ class SignUp extends Component {
       password: "",
       confirmPassword: ""
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   // TODO: Validate confirm password every state change, if they match and pass length show green check
@@ -35,7 +38,7 @@ class SignUp extends Component {
     // else {
     //   alert("Bad job");
     // }
-    Axios.post("/api/user", {
+    Axios.post("/user", {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password

@@ -3,13 +3,16 @@ import Axios from "axios";
 import { Input, FormBtn } from "../Form";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       username: "",
       password: "",
+      redirectTo: null
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (event) => {
@@ -20,18 +23,18 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    Axios.post("/api/user/login", {
+    Axios.post("/user/login", {
       username: this.state.username,
       password: this.state.password
     })
     .then((res) => {
-      console.log("Login response");
+      console.log("Login response: ");
       console.log(res);
       if(res.status === 200) {
-        // this.props.updateUser({
-        //   loggedIn: true,
-        //   username: res.data.username
-        // })
+        this.props.updateUser({
+          loggedIn: true,
+          username: res.data.username
+        })
         this.setState({
           redirectTo: "/saved"
         });

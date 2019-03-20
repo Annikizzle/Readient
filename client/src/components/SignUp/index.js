@@ -44,7 +44,7 @@ class SignUp extends Component {
       if(res.data) {
         console.log("Successful Signup");
         this.setState({
-          redirectTo: "/saved"
+          redirectTo: "/search"
         });
       }
       else {

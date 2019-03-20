@@ -56,7 +56,7 @@ app.get("*", (req, res) => {
 });
 
 // Connect to Database
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist", 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", 
 {
   useCreateIndex: true,
   useNewUrlParser: true

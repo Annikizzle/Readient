@@ -49,7 +49,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="col-md-4 mx-auto my-5">
+      <div className="col-md-6 mx-auto my-5">
         <form>
           <div className="form-group">
           <label htmlFor="loginUsername">Username</label>

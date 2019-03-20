@@ -3,16 +3,23 @@ const path = require("path");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const logger = require("morgan");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(logger('dev'));
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
 // Define API routes here
+
+//TEST
+// app.post("/users", (req, res) => {
+//   res.json({msg: "test"});
+// });
 
 // Send every other request to the React app
 // Define any API routes before this runs

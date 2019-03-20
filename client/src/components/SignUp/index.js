@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Axios from "axios";
 
 class SignUp extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class SignUp extends Component {
     }
   }
 
-  // Validate confirm password every state change, if they match and pass length show green check
+  // TODO: Validate confirm password every state change, if they match and pass length show green check
   validateForm = () => (
     this.state.email.length > 0 &&
     this.state.password.length > 7 &&
@@ -27,12 +28,31 @@ class SignUp extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if(this.validateForm()) {
-      alert("Good job");
-    }
-    else {
-      alert("Bad job");
-    }
+    // if(this.validateForm()) {
+    //   alert("Good job");
+    // }
+    // else {
+    //   alert("Bad job");
+    // }
+    Axios.post("/users", {
+      email: this.state.email,
+      username: this.state.username,
+      password: this.state.password
+    }).then((res) => {
+      console.log(res);
+      if(res.data) {
+        console.log("Successful Signup");
+        this.setState({
+          redirectTo: "/saved"
+        });
+      }
+      else {
+        console.log("Sign-up error");
+      }
+    }).catch((err) => {
+      console.log("Sign up server error");
+      console.log(err);
+    });
   }
 
   render() {

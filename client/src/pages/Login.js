@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
 import { Input, FormBtn } from "../components/Form";
 
 class Login extends Component {
@@ -48,6 +49,9 @@ class Login extends Component {
   }
 
   render() {
+    if(this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }}/>
+    }
     return (
       <div className="col-md-6 mx-auto my-5">
         <form>

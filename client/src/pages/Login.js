@@ -34,11 +34,12 @@ class Login extends Component {
       console.log("Login response: ");
       console.log(res);
       if(res.status === 200) {
+        console.log("updateUser called with:");
+        console.log(res.data);
         this.props.updateUser({
           loggedIn: true,
-          username: res.data.username
+          username: res.data
         });
-        this.props.getUser();
         this.setState({
           redirectTo: "/"
         });

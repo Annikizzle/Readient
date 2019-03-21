@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
 import { Input, FormBtn } from "../components/Form";
 
 class SignUp extends Component {
@@ -10,7 +11,8 @@ class SignUp extends Component {
       email: "",
       username: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      redirectTo: null
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,9 +48,26 @@ class SignUp extends Component {
       console.log(res);
       console.log(res.data);
       if(!res.data.error) {
-        console.log("Successful Signup");
-        this.setState({
-          redirectTo: "/search"
+        console.log("Successful Signup, Attempting Login");
+        Axios.post("/user/login", {
+          username: this.state.username,
+          password: this.state.password
+        })
+        .then((res) => {
+          console.log("Login response: ");
+          console.log(res);
+          if(res.status === 200) {
+            this.props.updateUser({
+              loggedIn: true,
+              username: res.data.username
+            })
+            this.setState({
+              redirectTo: "/"
+            });
+          }
+        }).catch((err) => {
+          console.log("Server Login Error");
+          console.log(err);
         });
       }
       else {
@@ -62,6 +81,9 @@ class SignUp extends Component {
   }
 
   render() {
+    if(this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }}/>
+    }
     return (
       <div className="col-md-6 mx-auto my-5">
         <form>

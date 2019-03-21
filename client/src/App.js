@@ -53,7 +53,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Nav />
+        <Nav username={this.state.username} loggedIn={this.state.loggedIn}/>
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/login" render={() => <Login updateUser={this.updateUser}/>}></Route>

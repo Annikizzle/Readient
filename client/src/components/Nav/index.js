@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import "./style.css";
 
 class Nav extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.logout = this.logout.bind(this);
   }
@@ -43,23 +44,36 @@ class Nav extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/saved">Saved</Link>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link" to="/saved">Saved</Link>
-            </li> */}
-            {/* {loggedIn ? (
-              <section className="navbar-section">
-                <Link className="btn btn-danger" to="/user/logout">Logout</Link>
-              </section>
+
+            {loggedIn ? (
+              <React.Fragment>
+                {/* <section className="navbar-section">
+                  <button className="btn btn-danger mx-2" onClick={this.logout}>Logout</button>
+                </section> */}
+                <li className="nav-item">
+                  {/* <Link className="nav-link" to="/saved">Saved</Link> */}
+                  <p className="nav-link m-0" id="logout-link" onClick={this.logout}>Logout</p>
+                </li>
+                <li className="nav-item">
+                  <p className="navbar-text m-0">Welcome, {this.props.username}</p>
+                </li>
+              </React.Fragment>
             ) : (
               <React.Fragment>
-                <section className="navbar-section">
-                  <Link className="btn btn-danger" to="/user/signup">Signup</Link>
-                </section>
-                <section className="navbar-section">
-                  <Link className="btn btn-danger" to="/user/signup">Login</Link>
-                </section>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/signup">Signup</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">Login</Link>
+                </li>
+                {/* <section className="navbar-section">
+                  <Link className="nav-link" to="signup">Signup</Link>
+                </section> */}
+                {/* <section className="navbar-section">
+                  <Link className="btn btn-danger mx-2" to="login">Login</Link>
+                </section> */}
               </React.Fragment>
-            )} */}
+            )}
           </ul>
         </div>
       </nav>

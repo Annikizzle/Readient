@@ -36,7 +36,7 @@ module.exports = {
 
   completeLogin: (req, res) => {
     console.log("Logged in", req.user);
-    res.send(req.user.username);
+    res.send({ username: req.user.username });
   },
 
   getCurrentUser: (req, res, next) => {

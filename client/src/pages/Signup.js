@@ -60,7 +60,7 @@ class SignUp extends Component {
             console.log(res.data);
             this.props.updateUser({
               loggedIn: true,
-              username: res.data
+              username: res.data.username
             });
             this.setState({
               redirectTo: "/"

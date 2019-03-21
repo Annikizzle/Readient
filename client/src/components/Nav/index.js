@@ -50,6 +50,10 @@ class Nav extends Component {
                 <li className="nav-item">
                   <p className="nav-link m-0" id="logout-link" onClick={this.logout}>Logout</p>
                 </li>
+                <li className="nav-item">
+                  <p className="navbar-text m-0">Hi {this.props.username}!</p>
+                </li>
+                
               </React.Fragment>
             ) : (
               <React.Fragment>

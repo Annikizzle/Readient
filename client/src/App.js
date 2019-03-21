@@ -26,6 +26,7 @@ class App extends Component {
 
   updateUser(userObject) {
     this.setState(userObject);
+    this.getUser();
   }
 
   getUser() {

@@ -47,15 +47,8 @@ class Nav extends Component {
 
             {loggedIn ? (
               <React.Fragment>
-                {/* <section className="navbar-section">
-                  <button className="btn btn-danger mx-2" onClick={this.logout}>Logout</button>
-                </section> */}
                 <li className="nav-item">
-                  {/* <Link className="nav-link" to="/saved">Saved</Link> */}
                   <p className="nav-link m-0" id="logout-link" onClick={this.logout}>Logout</p>
-                </li>
-                <li className="nav-item">
-                  <p className="navbar-text m-0">Welcome, {this.props.username}</p>
                 </li>
               </React.Fragment>
             ) : (
@@ -66,12 +59,6 @@ class Nav extends Component {
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">Login</Link>
                 </li>
-                {/* <section className="navbar-section">
-                  <Link className="nav-link" to="signup">Signup</Link>
-                </section> */}
-                {/* <section className="navbar-section">
-                  <Link className="btn btn-danger mx-2" to="login">Login</Link>
-                </section> */}
               </React.Fragment>
             )}
           </ul>

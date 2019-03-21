@@ -86,6 +86,7 @@ class SignUp extends Component {
     }
     return (
       <div className="col-md-6 mx-auto my-5">
+        <h2 className="text-center">Sign Up</h2>
         <form>
           <div className="form-group">
             <label htmlFor="inputEmail">Email Address</label>

@@ -26,7 +26,6 @@ class App extends Component {
 
   updateUser(userObject) {
     this.setState(userObject);
-    this.getUser();
   }
 
   getUser() {
@@ -54,11 +53,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Nav username={this.state.username} loggedIn={this.state.loggedIn} updateUser={this.updateUser}/>
+        <Nav username={this.state.username} 
+             loggedIn={this.state.loggedIn} 
+             updateUser={this.updateUser}
+        />
         <Switch>
           <Route exact path="/" component={Home}></Route>
-          <Route exact path="/login" render={() => <Login updateUser={this.updateUser}/>}></Route>
-          <Route exact path="/signup" render={() => <SignUp updateUser={this.updateUser}/>}></Route>
+          <Route exact path="/login" render={() => <Login updateUser={this.updateUser} getUser={this.getUser}/>}></Route>
+          <Route exact path="/signup" render={() => <SignUp updateUser={this.updateUser} getUser={this.getUser}/>}></Route>
           {/* <Route exact path="/saved" component={Saved}></Route> */}
           {/* <Route component={NoMatch}></Route> */}
         </Switch>

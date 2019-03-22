@@ -12,6 +12,7 @@ class SignUp extends Component {
       username: "",
       password: "",
       confirmPassword: "",
+      errorMsg: "",
       redirectTo: null
     }
 
@@ -19,66 +20,113 @@ class SignUp extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // TODO: Validate confirm password every state change, if they match and pass length show green check
-  validateForm = () => (
-    this.state.email.length > 0 &&
-    this.state.password.length > 7 &&
+  // Validate form on submit
+  validateForm = () => {
+    this.setState({
+      errorMsg: ""
+    });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.state.email)){
+      this.setState({
+        errorMsg: "Email is invalid."
+      });
+      return false;
+    }
+    else if (this.state.email.length < 1 || this.state.username.length < 1) {
+      this.setState({
+        errorMsg: "All fields are required."
+      });
+      return false;
+    }
+    else if (this.state.password.length < 8) {
+      this.setState({
+        errorMsg: "Password must be at least 8 characters."
+      });
+      return false;
+    }
+    else if (this.state.password.search(/[a-z]/i) < 0) {
+      this.setState({
+        errorMsg: "Password must contain at least one letter."
+      });
+      return false;
+    }
+    else if (this.state.password.search(/[0-9]/) < 0) {
+      this.setState({
+        errorMsg: "Password must contain at least one digit."
+      });
+      return false;
+    }
+    else if (this.state.password !== this.state.confirmPassword) {
+      this.setState({
+        errorMsg: "Passwords must match."
+      });
+      return false;
+    }
+    return true;
+  }
+
+  passwordsMatch = () => (
+    this.state.password.length > 0 &&
     this.state.password === this.state.confirmPassword
   );
 
   handleChange = (event) => {
+    let { name, value } = event.target;
+    if (name === "username") {
+      value = value.substring(0,15);
+    }
+    else if (name === "password") {
+
+    }
     this.setState( {
-      [event.target.name]: event.target.value
+      [name]: value
     });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // if(this.validateForm()) {
-    //   alert("Good job");
-    // }
-    // else {
-    //   alert("Bad job");
-    // }
-    Axios.post("/user", {
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password
-    }).then((res) => {
-      console.log(res);
-      console.log(res.data);
-      if(!res.data.error) {
-        console.log("Successful Signup, Attempting Login");
-        Axios.post("/user/login", {
-          username: this.state.username,
-          password: this.state.password
-        })
-        .then((res) => {
-          console.log("Login response: ");
-          console.log(res);
-          if(res.status === 200) {
-            console.log(res.data);
-            this.props.updateUser({
-              loggedIn: true,
-              username: res.data.username
-            });
-            this.setState({
-              redirectTo: "/"
-            });
-          }
-        }).catch((err) => {
-          console.log("Server Login Error");
-          console.log(err);
-        });
-      }
-      else {
-        // TODO DISPLAY SIGNUP ERROR AS MESSAGE ON PAGE 
-        console.log("Sign-up error");
-      }
-    }).catch((err) => {
-      console.log("Sign up server error");
-      console.log(err);
-    });
+    if(this.validateForm()) {
+      Axios.post("/user", {
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password
+      }).then((res) => {
+        // console.log(res);
+        // console.log(res.data);
+        if(!res.data.error) {
+          // console.log("Successful Signup, Attempting Login");
+          Axios.post("/user/login", {
+            username: this.state.username,
+            password: this.state.password
+          })
+          .then((res) => {
+            // console.log("Login response: ");
+            // console.log(res);
+            if(res.status === 200) {
+              // console.log(res.data);
+              this.props.updateUser({
+                loggedIn: true,
+                username: res.data.username
+              });
+              this.setState({
+                redirectTo: "/"
+              });
+            }
+          }).catch((err) => {
+            console.log("Server Login Error");
+            console.log(err);
+          });
+        }
+        else {
+          console.log("Sign-up error");
+          this.setState({
+            errorMsg: res.data.error
+          });
+        }
+      }).catch((err) => {
+        console.log("Sign up server error");
+        console.log(err);
+      });
+    }
   }
 
   render() {
@@ -88,18 +136,21 @@ class SignUp extends Component {
     return (
       <div className="col-md-6 mx-auto my-5">
         <h2 className="text-center">Sign Up</h2>
+        {this.state.errorMsg ? (
+          <div className="alert alert-danger" role="alert">
+            {this.state.errorMsg}
+          </div>
+        ) : ""}
         <form>
           <div className="form-group">
             <label htmlFor="inputEmail">Email Address</label>
             <Input type="email" 
                   id="inputEmail" 
-                  aria-describedby="emailHelp" 
                   placeholder="Enter email"
                   name="email"
                   value={this.state.email}
                   onChange={this.handleChange}
             />
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div className="form-group">
             <label htmlFor="inputUsername">Username</label>
@@ -130,6 +181,9 @@ class SignUp extends Component {
                   value={this.confirmPassword}
                   onChange={this.handleChange}
             />
+            {this.passwordsMatch() ? (
+              <small className="form-text text-success">Passwords match</small>
+            ) : ""}
           </div>
           <FormBtn className="btn btn-primary" onClick={this.handleSubmit}>Submit</FormBtn>
         </form>

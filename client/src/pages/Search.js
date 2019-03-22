@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { Input, FormBtn } from "../components/Form";
+import { Book } from "../components/Book";
 
 class Search extends Component {
   constructor() {
@@ -22,12 +23,17 @@ class Search extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    Axios.get("/api/google", { params: { query: this.state.query} }).then((res) => {
-      console.log(res);
-      // ADD TO BOOKS ARRAY
-    }).catch((err) => {
-      console.log(err);
-    });
+    if (this.state.query.length > 0) {
+      Axios.get("/api/google", { params: { query: this.state.query} }).then((res) => {
+        console.log(res);
+        // ADD TO BOOKS ARRAY
+        this.setState({
+          books: res.data
+        });
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   }
 
   render() {
@@ -61,7 +67,20 @@ class Search extends Component {
               <h2 className="text-center">Results</h2>
             </div>
             <div className="card-body">
-              {this.state.books.length < 1 ? <h2 className="text-center">Search for a book to begin!</h2> : ""}
+              {this.state.books.length < 1 ? <h2 className="text-center">Search for a book to begin!</h2> : (
+                <ul className="p-0">
+                  {this.state.books.map((book) => (
+                    <Book key={book.googleID} 
+                          title={book.title}
+                          authors={book.authors}
+                          description={book.description}
+                          image={book.image}
+                          link={book.link}
+                          googleID={book.googleID}
+                    />
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>

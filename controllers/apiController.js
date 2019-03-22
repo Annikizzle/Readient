@@ -20,7 +20,6 @@ module.exports = {
             link: element.volumeInfo.infoLink,
             googleID: element.id
           }
-          // console.log(book);
           books.push(book);
         }
       });
@@ -31,29 +30,3 @@ module.exports = {
     });
   }
 }
-
-// title: {
-//   type: String,
-//   required: true
-// },
-// authors: {
-//   type: [String],
-//   required: true
-// },
-// description: {
-//   type: String,
-//   required: true
-// },
-// image: {
-//   type: String,
-//   required: true
-// },
-// link: {
-//   type: String,
-//   required: true
-// },
-// googleID: {
-//   type: String,
-//   required: true,
-//   unique: true
-// }

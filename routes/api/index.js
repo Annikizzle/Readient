@@ -1,8 +1,8 @@
 const path = require("path");
 const Router = require("express").Router();
-const userRoutes = require("../user");
+const bookRoutes = require("./book");
 
-// Router.use("/user", userRoutes);
+Router.use("/books", bookRoutes);
 
 // For anything else, render the html page
 Router.use(function(req, res) {

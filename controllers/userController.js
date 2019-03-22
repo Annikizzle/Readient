@@ -31,11 +31,13 @@ module.exports = {
   attemptLogin: (req, res, next) => {
     console.log("Login user:");
     console.log(req.body);
+    // console.log("attempt res", res);
     next();
   },
 
   completeLogin: (req, res) => {
     console.log("Logged in", req.user);
+    console.log("RES", res);
     res.send({ username: req.user.username });
   },
 

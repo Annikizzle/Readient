@@ -10,6 +10,7 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
+      errorMsg: "",
       redirectTo: null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,6 +27,9 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({
+      errorMsg: ""
+    });
     Axios.post("/user/login", {
       username: this.state.username,
       password: this.state.password
@@ -34,8 +38,6 @@ class Login extends Component {
       console.log("Login response: ");
       console.log(res);
       if(res.status === 200) {
-        console.log("updateUser called with:");
-        console.log(res.data);
         this.props.updateUser({
           loggedIn: true,
           username: res.data.username
@@ -47,6 +49,9 @@ class Login extends Component {
     }).catch((err) => {
       console.log("Server Login Error");
       console.log(err);
+      this.setState({
+        errorMsg: "Login failed"
+      });
     });
   }
 
@@ -57,6 +62,11 @@ class Login extends Component {
     return (
       <div className="col-md-6 mx-auto my-5">
         <h2 className="text-center">Login</h2>
+        {this.state.errorMsg ? (
+          <div className="alert alert-danger" role="alert">
+            {this.state.errorMsg}
+          </div>
+        ) : ""}
         <form>
           <div className="form-group">
           <label htmlFor="loginUsername">Username</label>

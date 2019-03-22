@@ -21,7 +21,13 @@ class Search extends Component {
   }
 
   handleSubmit = (event) => {
-
+    event.preventDefault();
+    Axios.get("/api/google", { params: { query: this.state.query} }).then((res) => {
+      console.log(res);
+      // ADD TO BOOKS ARRAY
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   render() {

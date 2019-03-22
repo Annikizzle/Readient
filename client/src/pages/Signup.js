@@ -90,19 +90,19 @@ class SignUp extends Component {
         username: this.state.username,
         password: this.state.password
       }).then((res) => {
-        console.log(res);
-        console.log(res.data);
+        // console.log(res);
+        // console.log(res.data);
         if(!res.data.error) {
-          console.log("Successful Signup, Attempting Login");
+          // console.log("Successful Signup, Attempting Login");
           Axios.post("/user/login", {
             username: this.state.username,
             password: this.state.password
           })
           .then((res) => {
-            console.log("Login response: ");
-            console.log(res);
+            // console.log("Login response: ");
+            // console.log(res);
             if(res.status === 200) {
-              console.log(res.data);
+              // console.log(res.data);
               this.props.updateUser({
                 loggedIn: true,
                 username: res.data.username

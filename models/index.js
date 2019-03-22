@@ -1,3 +1,7 @@
 module.exports = {
-  User: require("./User")
+  User: require("./User"),
+  Book: require("./Book")
 }
+
+// SAVED stored as array in each user - has book id and enum with status (toread, reading, read)
+// BOOKS just like in hw

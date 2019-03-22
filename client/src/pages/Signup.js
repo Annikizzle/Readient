@@ -74,9 +74,6 @@ class SignUp extends Component {
     if (name === "username") {
       value = value.substring(0,15);
     }
-    else if (name === "password") {
-
-    }
     this.setState( {
       [name]: value
     });

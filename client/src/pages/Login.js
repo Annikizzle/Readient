@@ -50,7 +50,7 @@ class Login extends Component {
       console.log("Server Login Error");
       console.log(err);
       this.setState({
-        errorMsg: "Login failed"
+        errorMsg: "Login failed."
       });
     });
   }

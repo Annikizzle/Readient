@@ -61,6 +61,7 @@ class SignUp extends Component {
       });
       return false;
     }
+    return true;
   }
 
   passwordsMatch = () => (
@@ -117,6 +118,9 @@ class SignUp extends Component {
         }
         else {
           console.log("Sign-up error");
+          this.setState({
+            errorMsg: res.data.error
+          });
         }
       }).catch((err) => {
         console.log("Sign up server error");
@@ -133,7 +137,7 @@ class SignUp extends Component {
       <div className="col-md-6 mx-auto my-5">
         <h2 className="text-center">Sign Up</h2>
         {this.state.errorMsg ? (
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             {this.state.errorMsg}
           </div>
         ) : ""}

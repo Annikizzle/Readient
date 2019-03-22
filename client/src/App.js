@@ -4,6 +4,7 @@ import Axios from "axios";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
+import Search from "./pages/Search";
 import Nav from "./components/Nav";
 import "./App.css";
 
@@ -59,13 +60,16 @@ class App extends Component {
              loggedIn={this.state.loggedIn} 
              updateUser={this.updateUser}
         />
-        <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route exact path="/login" render={() => <Login updateUser={this.updateUser}/>}></Route>
-          <Route exact path="/signup" render={() => <SignUp updateUser={this.updateUser}/>}></Route>
-          {/* <Route exact path="/saved" component={Saved}></Route> */}
-          {/* <Route component={NoMatch}></Route> */}
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/login" render={() => <Login updateUser={this.updateUser}/>}></Route>
+            <Route exact path="/signup" render={() => <SignUp updateUser={this.updateUser}/>}></Route>
+            <Route exact path="/search" render={() => <Search/>}></Route>
+            {/* <Route exact path="/saved" component={Saved}></Route> */}
+            {/* <Route component={NoMatch}></Route> */}
+          </Switch>
+        </div>
       </Router>
     )
   }

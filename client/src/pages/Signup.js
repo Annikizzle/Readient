@@ -131,59 +131,67 @@ class SignUp extends Component {
       return <Redirect to={{ pathname: this.state.redirectTo }}/>
     }
     return (
-      <div className="col-md-6 mx-auto my-5">
-        <h2 className="text-center">Sign Up</h2>
-        {this.state.errorMsg ? (
-          <div className="alert alert-danger" role="alert">
-            {this.state.errorMsg}
+      <div className="row">
+        <div className="col-12 mx-auto my-5">
+          <div className="card">
+            <div className="card-header">
+              <h2 className="text-center">Sign Up</h2>
+            </div>
+            <div className="card-body">
+              {this.state.errorMsg ? (
+                <div className="alert alert-danger" role="alert">
+                  {this.state.errorMsg}
+                </div>
+              ) : ""}
+              <form>
+                <div className="form-group">
+                  <label htmlFor="inputEmail">Email Address</label>
+                  <Input type="email" 
+                        id="inputEmail" 
+                        placeholder="Enter email"
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="inputUsername">Username</label>
+                  <Input type="text" 
+                        id="inputUsername" 
+                        placeholder="Enter username"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="inputPassword">Password</label>
+                  <Input type="password" 
+                        id="inputPassword" 
+                        aria-describedby="passwordHelp"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                  />
+                  <small id="passwordHelp" className="form-text text-muted">Password must be at least 8 characters</small>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                  <Input type="password" 
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={this.confirmPassword}
+                        onChange={this.handleChange}
+                  />
+                  {this.passwordsMatch() ? (
+                    <small className="form-text text-success">Passwords match</small>
+                  ) : ""}
+                </div>
+                <FormBtn className="btn btn-primary float-right" onClick={this.handleSubmit}>Submit</FormBtn>
+              </form>
+            </div>
           </div>
-        ) : ""}
-        <form>
-          <div className="form-group">
-            <label htmlFor="inputEmail">Email Address</label>
-            <Input type="email" 
-                  id="inputEmail" 
-                  placeholder="Enter email"
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="inputUsername">Username</label>
-            <Input type="text" 
-                  id="inputUsername" 
-                  placeholder="Enter username"
-                  name="username"
-                  value={this.state.username}
-                  onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="inputPassword">Password</label>
-            <Input type="password" 
-                  id="inputPassword" 
-                  aria-describedby="passwordHelp"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-            />
-            <small id="passwordHelp" className="form-text text-muted">Password must be at least 8 characters</small>
-          </div>
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <Input type="password" 
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={this.confirmPassword}
-                  onChange={this.handleChange}
-            />
-            {this.passwordsMatch() ? (
-              <small className="form-text text-success">Passwords match</small>
-            ) : ""}
-          </div>
-          <FormBtn className="btn btn-primary" onClick={this.handleSubmit}>Submit</FormBtn>
-        </form>
+        </div>
       </div>
     )
   }

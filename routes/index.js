@@ -1,10 +1,10 @@
 const path = require("path");
 const Router = require("express").Router();
 const API = require("./api");
-const userRoutes = require("./user");
+const user = require("./user");
 
 Router.use("/api", API);
-Router.use("/user", userRoutes);
+Router.use("/user", user);
 
 // If no API routes are hit, send the React app
 Router.use((req, res) =>

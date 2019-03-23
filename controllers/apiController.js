@@ -6,12 +6,13 @@ module.exports = {
   // Add to database if not exists, send array of books to client
   findAll: (req, res) => {
     console.log(queryURL + req.query.query);
+    const URL = queryURL + req.query.query + ":keyes&key=" + process.env.GOOGLE_BOOKS_KEY
     Axios.get(queryURL + req.query.query).then((result) => {
       const bookList = result.data.items;
       const books = [];
       bookList.forEach(element => {
         // console.log(element);
-        if(element.volumeInfo.imageLinks) {
+        if(element.volumeInfo.imageLinks && element.volumeInfo.authors) {
           const book = {
             title: element.volumeInfo.title,
             authors: element.volumeInfo.authors,

@@ -24,7 +24,7 @@ class Search extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.query.length > 0) {
-      Axios.get("/api/google", { params: { query: this.state.query} }).then((res) => {
+      Axios.get("/api/google", { params: { query: this.state.query } }).then((res) => {
         console.log(res);
         this.setState({
           books: res.data
@@ -33,6 +33,27 @@ class Search extends Component {
         console.log(err);
       });
     }
+  }
+
+  handleSaveBook = (googleID) => {
+    const [book] = this.state.books.filter(book => book.googleID === googleID);
+
+    // Save book to database whether user is logged in or not
+    Axios.post("/api/books", book).then((res) => {
+      console.log(res);
+      // If user is logged in, save book to their favorites as well
+      if (this.props.loggedIn) {
+        Axios.post("/api/saved", { googleID }).then((res) => {
+          console.log(res);
+        }).catch((err) => { // fail to save favorite
+          console.log(err);
+        });
+      }
+
+    }).catch((err) => { // fail to post book
+      console.log(err);
+    });
+
   }
 
   render() {
@@ -76,6 +97,13 @@ class Search extends Component {
                           image={book.image}
                           link={book.link}
                           googleID={book.googleID}
+                          Button={() => (
+                            <button 
+                              onClick={() => this.handleSaveBook(book.googleID)}
+                              className="btn btn-primary"
+                            >
+                            Save</button>
+                          )}
                     />
                   ))}
                 </ul>

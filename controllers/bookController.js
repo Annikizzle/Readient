@@ -24,7 +24,6 @@ module.exports = {
 
   create: (req, res) => {
     db.Book.create(req.body).then((dbBook) => {
-      console.log(dbBook);
       res.json(dbBook);
     }).catch((err) => {
       console.log(err);
@@ -41,6 +40,4 @@ module.exports = {
       res.status(422).json(err);
     })
   },
-
-  //update
 }

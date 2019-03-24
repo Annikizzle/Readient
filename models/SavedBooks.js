@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const SavedBooksSchema = new Schema({
   googleID: {
-    type: string,
+    type: String,
     unique: true,
     required: true
   },

@@ -17,7 +17,6 @@ class Saved extends Component {
     this.getSavedBooks();
   }
 
-
   getSavedBooks = () => {
     console.log(this.props.loggedIn);
     if (this.props.loggedIn) { // Get user's saved books
@@ -29,59 +28,20 @@ class Saved extends Component {
       }).catch((err) => {
         console.log(err);
       });
-
     }
-    // else { // Otherwise get books stored in database
-    //   Axios.get("/api/books").then((res) => {
-    //     this.setState( {
-    //       saved: res.data
-    //     });
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
-    // }
   }
-  // handleChange = (event) => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   });
-  // }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (this.state.query.length > 0) {
-  //     Axios.get("/api/google", { params: { query: this.state.query } }).then((res) => {
-  //       console.log(res);
-  //       this.setState({
-  //         books: res.data
-  //       });
-  //     }).catch((err) => {
-  //       console.log(err);
-  //     });
-  //   }
-  // }
-
-  // handleSaveBook = (googleID) => {
-  //   const [book] = this.state.books.filter(book => book.googleID === googleID);
-
-  //   // Save book to database whether user is logged in or not
-  //   Axios.post("/api/books", book).then((res) => {
-  //     // console.log(res.data._id);
-  //     const _id = res.data._id
-  //     // If user is logged in, save book to their favorites as well
-  //     if (this.props.loggedIn) {
-  //       Axios.post("/api/saved", { _id }).then((res) => {
-  //         console.log(res);
-  //       }).catch((err) => { // fail to save favorite
-  //         console.log(err);
-  //       });
-  //     }
-
-  //   }).catch((err) => { // fail to post book
-  //     console.log(err);
-  //   });
-
-  // }
+  handleDeleteBook = (id) => {
+    if (this.props.loggedIn) {
+      Axios.delete("/api/saved/" + id).then((res) => {
+        console.log(res);
+        this.getSavedBooks();
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  }
+  
 
   render() {
     return (
@@ -103,11 +63,11 @@ class Saved extends Component {
                             link={entry.book.link}
                             googleID={entry.book.googleID}
                             status={entry.status}
-                            // Button={() => (
-                            //   <button 
-                            //     onClick={() => this.handleSaveBook(entry.book.googleID)}
-                            //     className="btn btn-primary">Save</button>
-                            // )}
+                            Button={() => (
+                              <button 
+                                onClick={() => this.handleDeleteBook(entry.book._id)}
+                                className="btn btn-primary">Delete</button>
+                            )}
                       />
                     )) : <h2 className="text-center">Log in to see your saved books</h2>}
                   </ul>

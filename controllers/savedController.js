@@ -14,12 +14,8 @@ module.exports = {
 
     }
   },
-
   create: (req, res) => {
-    // console.log(db.SavedBooks);
     if (req.user) {
-      // console.log(req.body.googleID);
-      // console.log(req.user._id);
       const savedBook = {
         book: req.body._id,
         user: req.user._id
@@ -37,6 +33,21 @@ module.exports = {
       }).then(() => {
         res.json(savedResponse);
       }).catch((err) => {
+        res.status(422).json(err);
+      });
+    }
+    else {
+      res.status(403);
+    }
+  },
+
+  delete: (req, res) => {
+    if (req.user) {
+      db.SavedBooks.findOneAndDelete({ book: req.params.id }).then((dbSaved) => {
+        console.log(dbSaved);
+        res.json(dbSaved);
+      }).catch((err) => {
+        console.log(err);
         res.status(422).json(err);
       });
     }

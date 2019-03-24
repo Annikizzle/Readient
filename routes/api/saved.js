@@ -6,7 +6,6 @@ Router.route("/")
   .post(savedController.create);
 
 Router.route("/:id")
-  // .get(bookController.findByID)
-  // .delete(bookController.delete);
+  .delete(savedController.delete);
 
 module.exports = Router;

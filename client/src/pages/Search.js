@@ -101,9 +101,7 @@ class Search extends Component {
                           Button={() => (
                             <button 
                               onClick={() => this.handleSaveBook(book.googleID)}
-                              className="btn btn-primary"
-                            >
-                            Save</button>
+                              className="btn btn-primary">Save</button>
                           )}
                     />
                   ))}

@@ -3,8 +3,16 @@ const db = require("../models");
 module.exports = {
 
   findAll: (req, res) => {
-    console.log(db.SavedBooks);
-    res.json("hi");
+    if (req.user) {
+      console.log(db.SavedBooks);
+      // res.json("hi");
+      db.SavedBooks.find({ user: req.user._id }).populate("book").then((dbSaved) => {
+        res.json(dbSaved);
+      }).catch((err) => {
+        res.status(422).json(err);
+      });
+
+    }
   },
 
   create: (req, res) => {

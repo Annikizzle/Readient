@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
 import Search from "./pages/Search";
+import Saved from "./pages/Saved";
 import Nav from "./components/Nav";
 import "./App.css";
 
@@ -67,6 +68,7 @@ class App extends Component {
             <Route exact path="/signup" render={() => <SignUp updateUser={this.updateUser}/>}></Route>
             <Route exact path="/search" render={() => <Search username={this.state.username} 
                                                               loggedIn={this.state.loggedIn} />}></Route>
+            <Route exact path="/saved" render={() => <Saved loggedIn={this.state.loggedIn}/>}></Route>
             {/* <Route exact path="/saved" component={Saved}></Route> */}
             {/* <Route component={NoMatch}></Route> */}
           </Switch>

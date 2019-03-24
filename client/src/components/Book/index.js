@@ -12,7 +12,8 @@ export function Book(props) {
             <h3><a href={props.link}>{props.title}</a></h3>
             <p>{props.authors.join(", ")}</p>
             <p>{props.description}</p>
-            <props.Button/>
+            {props.Button ? <props.Button/> : ""}
+            {props.status ? <p>{props.status}</p> : ""}
           </div>
         </div>
       </div>

@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const SavedBooksSchema = new Schema({
-  googleID: {
-    type: String,
-    unique: true,
-    required: true
+  book: {
+    type: Schema.Types.ObjectId,
+    ref: "Book"
   },
   user: {
     type: Schema.Types.ObjectId,

@@ -40,10 +40,11 @@ class Search extends Component {
 
     // Save book to database whether user is logged in or not
     Axios.post("/api/books", book).then((res) => {
-      console.log(res);
+      // console.log(res.data._id);
+      const _id = res.data._id
       // If user is logged in, save book to their favorites as well
       if (this.props.loggedIn) {
-        Axios.post("/api/saved", { googleID }).then((res) => {
+        Axios.post("/api/saved", { _id }).then((res) => {
           console.log(res);
         }).catch((err) => { // fail to save favorite
           console.log(err);

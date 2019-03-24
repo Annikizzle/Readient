@@ -13,9 +13,10 @@ module.exports = {
       // console.log(req.body.googleID);
       // console.log(req.user._id);
       const savedBook = {
-        googleID: req.body.googleID,
+        book: req.body._id,
         user: req.user._id
       }
+      console.log(savedBook);
       let savedResponse;
       db.SavedBooks.create(savedBook).then((dbSaved) => {
         console.log(dbSaved)

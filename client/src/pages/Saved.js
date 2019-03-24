@@ -11,13 +11,12 @@ class Saved extends Component {
     }
 
     this.componentDidMount = this.componentDidMount.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.getSavedBooks();
   }
+
 
   getSavedBooks = () => {
     console.log(this.props.loggedIn);
@@ -32,9 +31,15 @@ class Saved extends Component {
       });
 
     }
-    else { // Otherwise get books stored in database
-
-    }
+    // else { // Otherwise get books stored in database
+    //   Axios.get("/api/books").then((res) => {
+    //     this.setState( {
+    //       saved: res.data
+    //     });
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   });
+    // }
   }
   // handleChange = (event) => {
   //   this.setState({
@@ -83,29 +88,30 @@ class Saved extends Component {
       <div className="col-12 my-5 mx-auto">
           <div className="card">
             <div className="card-header">
-              <h2 className="text-center">Saved</h2>
+              <h2 className="text-center">Favorites</h2>
             </div>
             <div className="card-body">
-              {this.state.saved.length < 1 ? <h2 className="text-center">No Saved Books Yet</h2> : (
-                <ul className="p-0">
-                  {this.state.saved.map((entry) => (
-                    <Book key={entry.book.googleID} 
-                          title={entry.book.title}
-                          authors={entry.book.authors}
-                          description={entry.book.description}
-                          image={entry.book.image}
-                          link={entry.book.link}
-                          googleID={entry.book.googleID}
-                          status={entry.status}
-                          // Button={() => (
-                          //   <button 
-                          //     onClick={() => this.handleSaveBook(entry.book.googleID)}
-                          //     className="btn btn-primary">Save</button>
-                          // )}
-                    />
-                  ))}
-                </ul>
-              )}
+              {!this.props.loggedIn ? <h2 className="text-center">Log in to see your saved books</h2> : 
+                this.state.saved.length < 1 ? <h2 className="text-center">No Saved Books Yet</h2> : (
+                  <ul className="p-0">
+                    {this.props.loggedIn ? this.state.saved.map((entry) => (
+                      <Book key={entry.book.googleID} 
+                            title={entry.book.title}
+                            authors={entry.book.authors}
+                            description={entry.book.description}
+                            image={entry.book.image}
+                            link={entry.book.link}
+                            googleID={entry.book.googleID}
+                            status={entry.status}
+                            // Button={() => (
+                            //   <button 
+                            //     onClick={() => this.handleSaveBook(entry.book.googleID)}
+                            //     className="btn btn-primary">Save</button>
+                            // )}
+                      />
+                    )) : <h2 className="text-center">Log in to see your saved books</h2>}
+                  </ul>
+                )}
             </div>
           </div>
         </div>

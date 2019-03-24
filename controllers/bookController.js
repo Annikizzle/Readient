@@ -22,6 +22,16 @@ module.exports = {
     });
   },
 
+  findByGoogleID: (req, res) => {
+    db.Book.find({ googleID: req.params.id }).then((dbBook) => {
+      console.log(dbBook);
+      res.json(dbBook);
+    }).catch((err) => {
+      console.log(err);
+      res.status(422).json(err);
+    });
+  },
+
   create: (req, res) => {
     db.Book.create(req.body).then((dbBook) => {
       res.json(dbBook);

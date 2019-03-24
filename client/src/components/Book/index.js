@@ -13,7 +13,15 @@ export function Book(props) {
             <p>{props.authors.join(", ")}</p>
             <p>{props.description}</p>
             {props.Button ? <props.Button/> : ""}
-            {props.status ? <p>{props.status}</p> : ""}
+            {/* {props.status ? (
+              // <p className="text-capitalize">{props.status}</p>
+              <select>
+                <option>Unread</option>
+                <option>Reading</option>
+                <option>Read</option>
+              </select>
+              
+            ) : "" } */}
           </div>
         </div>
       </div>

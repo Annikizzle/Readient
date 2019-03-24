@@ -9,4 +9,7 @@ Router.route("/:id")
   .get(bookController.findByID)
   .delete(bookController.delete);
 
+Router.route("/googleID/:id")
+  .get(bookController.findByGoogleID);
+
 module.exports = Router;

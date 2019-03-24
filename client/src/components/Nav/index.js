@@ -19,6 +19,7 @@ class Nav extends Component {
           loggedIn: false,
           username: null
         });
+        // this.context.router.replace('/home');
       }
     }).catch((err) => {
       console.log("Logout error");

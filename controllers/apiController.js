@@ -11,7 +11,6 @@ module.exports = {
       const bookList = result.data.items;
       const books = [];
       bookList.forEach(element => {
-        // console.log(element);
         if(element.volumeInfo.imageLinks && element.volumeInfo.authors) {
           const book = {
             title: element.volumeInfo.title,

@@ -20,7 +20,11 @@ const UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  savedBooks: [{
+    type: Schema.Types.ObjectId,
+    ref: "savedBook"
+  }]
 });
 
 UserSchema.methods = {

@@ -26,7 +26,6 @@ class Search extends Component {
     if (this.state.query.length > 0) {
       Axios.get("/api/google", { params: { query: this.state.query} }).then((res) => {
         console.log(res);
-        // ADD TO BOOKS ARRAY
         this.setState({
           books: res.data
         });

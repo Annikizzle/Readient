@@ -4,8 +4,6 @@ module.exports = {
 
   findAll: (req, res) => {
     if (req.user) {
-      console.log(db.SavedBooks);
-      // res.json("hi");
       db.SavedBooks.find({ user: req.user._id }).populate("book").then((dbSaved) => {
         res.json(dbSaved);
       }).catch((err) => {
@@ -21,26 +19,33 @@ module.exports = {
         book: req.body._id,
         user: req.user._id
       }
-      // console.log(savedBook);
+      console.log(savedBook);
       
-      // db.SavedBooks.find(savedBook).then((dbSaved) => {
-      //   console.log(dbSaved);
-      // });
+      db.SavedBooks.find(savedBook).then((dbSaved) => {
+        const [foundBook] = dbSaved;
+        console.log("found saved book", foundBook);
+        if (dbSaved.length < 1) {
+          let savedResponse;
+          db.SavedBooks.create(savedBook).then((dbSaved) => {
+            console.log(dbSaved)
+            savedResponse = dbSaved;
+            return db.User.findOneAndUpdate(
+              { _id: req.user._id },
+              { $push: { savedBooks: dbSaved._id }},
+              { new: true },
+            );
+          }).then(() => {
+            res.json(savedResponse);
+          }).catch((err) => {
+            res.status(422).json(err);
+          });
+        }
+        else {
+          res.status(304);
+        }
 
-      let savedResponse;
-      db.SavedBooks.create(savedBook).then((dbSaved) => {
-        console.log(dbSaved)
-        savedResponse = dbSaved;
-        return db.User.findOneAndUpdate(
-          { _id: req.user._id },
-          { $push: { savedBooks: dbSaved._id }},
-          { new: true },
-        );
-      }).then(() => {
-        res.json(savedResponse);
-      }).catch((err) => {
-        res.status(422).json(err);
       });
+
     }
     else {
       res.status(403);

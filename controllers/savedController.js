@@ -14,13 +14,19 @@ module.exports = {
 
     }
   },
+  
   create: (req, res) => {
     if (req.user) {
       const savedBook = {
         book: req.body._id,
         user: req.user._id
       }
-      console.log(savedBook);
+      // console.log(savedBook);
+      
+      // db.SavedBooks.find(savedBook).then((dbSaved) => {
+      //   console.log(dbSaved);
+      // });
+
       let savedResponse;
       db.SavedBooks.create(savedBook).then((dbSaved) => {
         console.log(dbSaved)

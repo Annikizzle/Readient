@@ -15,8 +15,18 @@ class Saved extends Component {
 
   componentDidMount() {
     this.getSavedBooks();
+    this.getUser();
   }
 
+  getUser = () => {
+    Axios.get("/user").then((res) => {
+      console.log(res);
+      if(res.data.user) {}
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  
   getSavedBooks = () => {
     console.log(this.props.loggedIn);
     if (this.props.loggedIn) { // Get user's saved books

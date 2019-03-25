@@ -37,6 +37,7 @@ class Search extends Component {
 
   handleSaveBook = (googleID) => {
     const [book] = this.state.books.filter(book => book.googleID === googleID);
+    // console.log(book);
     Axios.get("/api/books/googleID/" + googleID).then((res) => {
       console.log(res);
       if (res.data.length > 0) { // If book is already saved, just add it to favorites if logged in
@@ -51,29 +52,29 @@ class Search extends Component {
             console.log(err);
           });
         }
+      }
       else {
         console.log("Book not in db yet!");
+        // Save book to database whether user is logged in or not
+        Axios.post("/api/books", book).then((res) => {
+          // console.log(res.data._id);
+          const _id = res.data._id
+          // If user is logged in, save book to their favorites as well
+          if (this.props.loggedIn) {
+            Axios.post("/api/saved", { _id }).then((res) => {
+              console.log(res);
+            }).catch((err) => { // fail to save favorite
+              console.log(err);
+            });
+          }
+    
+        }).catch((err) => { // fail to post book
+          console.log(err);
+        });
       }
-    }
   }).catch((err) => { // catch get by googleID
     console.log(err);
   });
-    // Save book to database whether user is logged in or not
-    // Axios.post("/api/books", book).then((res) => {
-    //   // console.log(res.data._id);
-    //   const _id = res.data._id
-    //   // If user is logged in, save book to their favorites as well
-      // if (this.props.loggedIn) {
-      //   Axios.post("/api/saved", { _id }).then((res) => {
-      //     console.log(res);
-      //   }).catch((err) => { // fail to save favorite
-      //     console.log(err);
-      //   });
-    //   }
-
-    // }).catch((err) => { // fail to post book
-    //   console.log(err);
-    // });
 
   }
 

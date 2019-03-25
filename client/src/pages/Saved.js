@@ -15,23 +15,11 @@ class Saved extends Component {
 
   componentDidMount() {
     this.getSavedBooks();
-    // this.getUser();
   }
-
-  // getUser = () => {
-  //   Axios.get("/user").then((res) => {
-  //     console.log(res);
-  //     if(res.data.user) {}
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   });
-  // }
   
   getSavedBooks = () => {
-    console.log(this.props.loggedIn);
     if (this.props.loggedIn) { // Get user's saved books
       Axios.get("/api/saved").then((res) => {
-        console.log(res);
         this.setState({
           saved: res.data
         });
@@ -44,7 +32,6 @@ class Saved extends Component {
   handleDeleteBook = (id) => {
     if (this.props.loggedIn) {
       Axios.delete("/api/saved/" + id).then((res) => {
-        console.log(res);
         this.getSavedBooks();
       }).catch((err) => {
         console.log(err);
@@ -54,7 +41,6 @@ class Saved extends Component {
   
 
   render() {
-    console.log(this.state.saved);
     return (
       <div className="col-12 my-5 mx-auto">
           <div className="card">

@@ -32,17 +32,13 @@ class App extends Component {
 
   getUser() {
     Axios.get("/user").then((res) => {
-      console.log("Get user response: ");
-      console.log(res.data);
       if (res.data.user) {
-        console.log("Get user: There is a user saved in the server session");
         this.setState({
           loggedIn: true,
           username: res.data.user.username
         });
       }
       else {
-        console.log("Get user: No user saved in the server session");
         this.setState({
           loggedIn: false,
           username: null
@@ -53,8 +49,6 @@ class App extends Component {
 
 
   render() {
-    console.log("App.js state:");
-    console.log(this.state);
     return (
       <Router>
         <Nav username={this.state.username} 
@@ -69,8 +63,6 @@ class App extends Component {
             <Route exact path="/search" render={() => <Search username={this.state.username} 
                                                               loggedIn={this.state.loggedIn} />}></Route>
             <Route exact path="/saved" render={() => <Saved loggedIn={this.state.loggedIn}/>}></Route>
-            {/* <Route exact path="/saved" component={Saved}></Route> */}
-            {/* <Route component={NoMatch}></Route> */}
           </Switch>
         </div>
       </Router>

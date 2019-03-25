@@ -11,15 +11,12 @@ class Nav extends Component {
 
   logout = (event) => {
     event.preventDefault();
-    // console.log("Logging out");
     Axios.post("/user/logout").then((res) => {
-      // console.log(res.data);
       if (res.status === 200) {
         this.props.updateUser({
           loggedIn: false,
           username: null
         });
-        // this.context.router.replace('/home');
       }
     }).catch((err) => {
       console.log("Logout error");
@@ -29,8 +26,6 @@ class Nav extends Component {
   
   render() {
     const loggedIn = this.props.loggedIn;
-    // console.log("navbar render, props: ");
-    // console.log(this.props);
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">Readient</Link>

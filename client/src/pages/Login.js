@@ -15,8 +15,6 @@ class Login extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // console.log("login props");
-    // console.log(this.props);
   }
 
   handleChange = (event) => {
@@ -35,8 +33,6 @@ class Login extends Component {
       password: this.state.password
     })
     .then((res) => {
-      // console.log("Login response: ");
-      // console.log(res);
       if(res.status === 200) {
         this.props.updateUser({
           loggedIn: true,
@@ -47,8 +43,6 @@ class Login extends Component {
         });
       }
     }).catch((err) => {
-      // console.log("Server Login Error");
-      // console.log(err);
       this.setState({
         errorMsg: "Login failed."
       });

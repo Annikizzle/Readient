@@ -26,10 +26,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Logs req.session for debugging purposes
-// app.use( (req, res, next) => {
-//   console.log('req.session', req.session);
-//   return next();
-// });
+app.use( (req, res, next) => {
+  console.log('req.session', req.session);
+  return next();
+});
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

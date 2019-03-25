@@ -4,7 +4,6 @@ module.exports = {
 
   findAll: (req, res) => {
     db.Book.find({}).then((dbBook) => {
-      console.log(dbBook);
       res.json(dbBook);
     }).catch((err) => {
       console.log(err);
@@ -14,7 +13,6 @@ module.exports = {
 
   findByID: (req, res) => {
     db.Book.findById(req.params.id).then((dbBook) => {
-      console.log(dbBook);
       res.json(dbBook);
     }).catch((err) => {
       console.log(err);
@@ -24,7 +22,6 @@ module.exports = {
 
   findByGoogleID: (req, res) => {
     db.Book.find({ googleID: req.params.id }).then((dbBook) => {
-      console.log(dbBook);
       res.json(dbBook);
     }).catch((err) => {
       console.log(err);
@@ -43,7 +40,6 @@ module.exports = {
   
   delete: (req, res) => {
     db.Book.findOneAndRemove({ _id: req.params.id }).then((dbBook) => {
-      console.log(dbBook);
       res.json(dbBook);
     }).catch((err) => {
       console.log(err);

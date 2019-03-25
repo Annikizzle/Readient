@@ -25,18 +25,12 @@ class Search extends Component {
     event.preventDefault();
     if (this.state.query.length > 0) {
       Axios.get("/api/google", { params: { query: this.state.query } }).then((res) => {
-        console.log(res);
         const books = res.data;
         const googleIDs = res.data.map((book) => book.googleID);
-        console.log(googleIDs);
         Axios.get("/api/saved").then((res) => {
-          console.log(res.data);
           const savedIDs = res.data.map((saved) => saved.book.googleID);
-          console.log(savedIDs);
           const unsavedIDs = googleIDs.filter((id) => !savedIDs.includes(id));
-          console.log(unsavedIDs);
           const toDisplay = books.filter((book) => unsavedIDs.includes(book.googleID));
-          console.log("To display", toDisplay);
           this.setState({
             books: toDisplay
           });
@@ -53,29 +47,23 @@ class Search extends Component {
     Axios.get("/api/books/googleID/" + googleID).then((res) => {
       console.log(res);
       if (res.data.length > 0) { // If book is already saved, just add it to favorites if logged in
-        console.log("Book already in db!");
-        console.log(res.data);
         const [foundBook] = res.data;
         const _id = foundBook._id;
         if (this.props.loggedIn) {
           Axios.post("/api/saved", { _id }).then((res) => {
-            console.log(res);
           }).catch((err) => { // fail to save favorite
             console.log(err);
           });
         }
       }
       else {
-        console.log("Book not in db yet!");
         // Save book to database whether user is logged in or not
         Axios.post("/api/books", book).then((res) => {
           // console.log(res.data._id);
           const _id = res.data._id
           // If user is logged in, save book to their favorites as well
           if (this.props.loggedIn) {
-            Axios.post("/api/saved", { _id }).then((res) => {
-              console.log(res);
-            }).catch((err) => { // fail to save favorite
+            Axios.post("/api/saved", { _id }).catch((err) => { // fail to save favorite
               console.log(err);
             });
           }

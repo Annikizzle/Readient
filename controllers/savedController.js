@@ -19,15 +19,12 @@ module.exports = {
         book: req.body._id,
         user: req.user._id
       }
-      console.log(savedBook);
       
       db.SavedBooks.find(savedBook).then((dbSaved) => {
         const [foundBook] = dbSaved;
-        console.log("found saved book", foundBook);
         if (dbSaved.length < 1) {
           let savedResponse;
           db.SavedBooks.create(savedBook).then((dbSaved) => {
-            console.log(dbSaved)
             savedResponse = dbSaved;
             return db.User.findOneAndUpdate(
               { _id: req.user._id },
@@ -56,7 +53,6 @@ module.exports = {
     if (req.user) {
       let deletedBook;
       db.SavedBooks.findOneAndDelete({ book: req.params.id }).then((dbSaved) => {
-        // console.log("DBsaved",dbSaved);
         const user = dbSaved.user;
         const id = dbSaved._id;
         let deletedBook = dbSaved;

@@ -27,21 +27,14 @@ module.exports = {
   },
 
   attemptLogin: (req, res, next) => {
-    // console.log("Login user:");
-    // console.log(req.body);
-    // console.log("attempt res", res);
     next();
   },
 
   completeLogin: (req, res) => {
-    // console.log("Logged in", req.user);
-    // console.log("RES", res);
     res.send({ username: req.user.username });
   },
 
   getCurrentUser: (req, res, next) => {
-    // console.log("USER: ");
-    // console.log(req.user);
     if (req.user) {
       res.json({ user: req.user });
     }

@@ -26,8 +26,20 @@ class Search extends Component {
     if (this.state.query.length > 0) {
       Axios.get("/api/google", { params: { query: this.state.query } }).then((res) => {
         console.log(res);
-        this.setState({
-          books: res.data
+        const books = res.data;
+        const googleIDs = res.data.map((book) => book.googleID);
+        console.log(googleIDs);
+        Axios.get("/api/saved").then((res) => {
+          console.log(res.data);
+          const savedIDs = res.data.map((saved) => saved.book.googleID);
+          console.log(savedIDs);
+          const unsavedIDs = googleIDs.filter((id) => !savedIDs.includes(id));
+          console.log(unsavedIDs);
+          const toDisplay = books.filter((book) => unsavedIDs.includes(book.googleID));
+          console.log("To display", toDisplay);
+          this.setState({
+            books: toDisplay
+          });
         });
       }).catch((err) => {
         console.log(err);

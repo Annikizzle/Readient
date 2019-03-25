@@ -49,9 +49,15 @@ module.exports = {
 
   delete: (req, res) => {
     if (req.user) {
+      let deletedBook;
       db.SavedBooks.findOneAndDelete({ book: req.params.id }).then((dbSaved) => {
-        console.log(dbSaved);
-        res.json(dbSaved);
+        // console.log("DBsaved",dbSaved);
+        const user = dbSaved.user;
+        const id = dbSaved._id;
+        let deletedBook = dbSaved;
+        db.User.update({ _id: user }, { $pull: { savedBooks: id }}).then((dbUser) => {
+          res.json(deletedBook);
+        }); 
       }).catch((err) => {
         console.log(err);
         res.status(422).json(err);

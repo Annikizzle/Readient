@@ -54,6 +54,7 @@ class Saved extends Component {
   
 
   render() {
+    console.log(this.state.saved);
     return (
       <div className="col-12 my-5 mx-auto">
           <div className="card">

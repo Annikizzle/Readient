@@ -4,6 +4,11 @@
 
 [Live Site](https://desolate-cove-30232.herokuapp.com)
 
+## Guest Account
+If you do not wish to create account, feel free to use these credentials:
+* Username: guest
+* Password: guest123
+
 Readient is a MERN (MongoDB, Express, React, Node) application where users can search for books using the Google Books API. After signing up for an account, users can save books to their account or delete saved books if they choose.
 
 ## Packages used: 

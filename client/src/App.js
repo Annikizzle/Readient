@@ -57,11 +57,11 @@ class App extends Component {
         />
         <div className="container">
           <Switch>
-            <Route exact path="/" component={Home}></Route>
+            {/* <Route exact path="/" component={Home}></Route> */}
+            <Route exact path="/" render={() => <Search username={this.state.username} 
+                                                              loggedIn={this.state.loggedIn} />}></Route>
             <Route exact path="/login" render={() => <Login updateUser={this.updateUser}/>}></Route>
             <Route exact path="/signup" render={() => <SignUp updateUser={this.updateUser}/>}></Route>
-            <Route exact path="/search" render={() => <Search username={this.state.username} 
-                                                              loggedIn={this.state.loggedIn} />}></Route>
             <Route exact path="/saved" render={() => <Saved loggedIn={this.state.loggedIn}/>}></Route>
           </Switch>
         </div>

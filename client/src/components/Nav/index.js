@@ -34,20 +34,20 @@ class Nav extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/search">Search</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/saved">Saved</Link>
-            </li>
 
             {loggedIn ? (
               <React.Fragment>
                 <li className="nav-item">
-                  <p className="nav-link m-0" id="logout-link" onClick={this.logout}>Logout</p>
+                  <p className="navbar-text m-0 px-1">Hi {this.props.username}!</p>
                 </li>
                 <li className="nav-item">
-                  <p className="navbar-text m-0">Hi {this.props.username}!</p>
+                  <Link className="nav-link" to="/">Search</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/saved">Saved</Link>
+                </li>
+                <li className="nav-item">
+                  <p className="nav-link m-0" id="logout-link" onClick={this.logout}>Logout</p>
                 </li>
                 
               </React.Fragment>

@@ -51,6 +51,7 @@ class Search extends Component {
         const _id = foundBook._id;
         if (this.props.loggedIn) {
           Axios.post("/api/saved", { _id }).then((res) => {
+            console.log(res.data);
           }).catch((err) => { // fail to save favorite
             console.log(err);
           });

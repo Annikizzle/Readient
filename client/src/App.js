@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Axios from "axios";
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
 import Search from "./pages/Search";
@@ -57,7 +56,6 @@ class App extends Component {
         />
         <div className="container">
           <Switch>
-            {/* <Route exact path="/" component={Home}></Route> */}
             <Route exact path="/" render={() => <Search username={this.state.username} 
                                                               loggedIn={this.state.loggedIn} />}></Route>
             <Route exact path="/login" render={() => <Login updateUser={this.updateUser}/>}></Route>

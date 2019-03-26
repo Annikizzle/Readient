@@ -39,7 +39,6 @@ class Saved extends Component {
     }
   }
   
-
   render() {
     return (
       <div className="col-12 my-5 mx-auto">
